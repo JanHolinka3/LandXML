@@ -10,7 +10,7 @@ from active collection loop all objects: 3 type objects: with faces (will be tri
 
 create TIN surface from face objects 
 
-create breakLines from edges - you need 1 object for every continuus line - named by object name - order is solved by algorymt (Blender can have edges in any order)
+create breakLines from edges - you need 1 object for every continuus line - named by object name - order is solved by algorithm (Blender can have edges in any order)
 
 create CgPoints from vert type object - you need only one such object, name by vert index
 
