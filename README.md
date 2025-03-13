@@ -6,7 +6,7 @@ pripocetX, pripocetY, pripocetZ are for world coords (you have to solve that for
 
 positiveNegative should be 1 for positive coords and -1 for negative coords
 
-from active collection loop all objects: 3 type objects: with faces (tris only), with only egdes, with only verts
+from active collection loop all objects: 3 type objects: with faces (will be triangulated), with only egdes, with only verts
 
 create TIN surface from face objects 
 
