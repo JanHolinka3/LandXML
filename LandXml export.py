@@ -11,20 +11,24 @@ import bmesh
 
 #testik
 
-projectName = "model zlaby proviz 3"
-fileName = "UniControl/vytycovaci modely/zlaby proviz model3.xml"
+projectName = "model zlaby proviz 4"
+fileName = "UniControl/vytycovaci modely/zlaby proviz model4.xml"
 
-if bpy.context.active_object.mode == 'EDIT':
-    bpy.ops.object.mode_set(mode='OBJECT')
-    bpy.ops.object.mode_set(mode='EDIT')
-
-pripocetX = 782700.0
-pripocetY = 1197500.0
-pripocetZ = 720.0
+additionX = 782700.0
+additionY = 1197500.0
+additionZ = 720.0
 
 positiveNegative = 1
 
+#format = 1 #"X,Y,Z"
+format = 2 #"Y,X,Z"
+
 aktivniKolekce = bpy.context.view_layer.active_layer_collection.collection
+
+#to save changes made in edit if in edit mode
+if bpy.context.active_object.mode == 'EDIT':
+    bpy.ops.object.mode_set(mode='OBJECT')
+    bpy.ops.object.mode_set(mode='EDIT')
 
 listMeshObj = []
 listLineObj = []
@@ -84,11 +88,14 @@ def zapisXml():
             
             for vert in bm.verts:
                 file.write("          <P id=\"" + str(vert.index + 1) + "\">")
-                xSour = (vert.co[1]+pripocetY)*positiveNegative
+                xSour = (vert.co[0]+additionX)*positiveNegative
+                ySour = (vert.co[1]+additionY)*positiveNegative
+                if format == 2:
+                    xSour = (vert.co[1]+additionY)*positiveNegative
+                    ySour = (vert.co[0]+additionX)*positiveNegative
+                zSour = vert.co[2]+additionZ
                 file.write(str("{:.3f}".format(xSour)) + " ")
-                ySour = (vert.co[0]+pripocetX)*positiveNegative
                 file.write(str("{:.3f}".format(ySour)) + " ")
-                zSour = vert.co[2]+pripocetZ
                 file.write(str("{:.3f}".format(zSour)))
                 #pridat vyjimku pro posledni radek
                 file.write("</P>\n")
@@ -127,12 +134,14 @@ def zapisXml():
                     listProslychEdges = []
                     listProslychVerts = []
                     if len(vert.link_edges) == 1:#po prvnim krajnim vert koncime
-
-                        xSour = (vert.co[1]+pripocetY)*positiveNegative
+                        xSour = (vert.co[0]+additionX)*positiveNegative
+                        ySour = (vert.co[1]+additionY)*positiveNegative
+                        if format == 2:
+                            xSour = (vert.co[1]+additionY)*positiveNegative
+                            ySour = (vert.co[0]+additionX)*positiveNegative
+                        zSour = vert.co[2]+additionZ
                         file.write(str("{:.3f}".format(xSour)) + " ")
-                        ySour = (vert.co[0]+pripocetX)*positiveNegative
                         file.write(str("{:.3f}".format(ySour)) + " ")
-                        zSour = vert.co[2]+pripocetZ
                         file.write(str("{:.3f}".format(zSour)) + " ")
 
                         listProslychVerts.append(vert.index)
@@ -141,11 +150,14 @@ def zapisXml():
                         currentVerts = currentEdges[0].verts
                         for vert2 in currentVerts:
                             if vert2.index != vert.index:
-                                xSour = (vert2.co[1]+pripocetY)*positiveNegative
+                                xSour = (vert2.co[0]+additionX)*positiveNegative
+                                ySour = (vert2.co[1]+additionY)*positiveNegative
+                                if format == 2:
+                                    xSour = (vert2.co[1]+additionY)*positiveNegative
+                                    ySour = (vert2.co[0]+additionX)*positiveNegative
+                                zSour = vert2.co[2]+additionZ
                                 file.write(str("{:.3f}".format(xSour)) + " ")
-                                ySour = (vert2.co[0]+pripocetX)*positiveNegative
                                 file.write(str("{:.3f}".format(ySour)) + " ")
-                                zSour = vert2.co[2]+pripocetZ
                                 file.write(str("{:.3f}".format(zSour)) + " ")
                                 listProslychVerts.append(vert2.index)
                                 break
@@ -165,11 +177,14 @@ def zapisXml():
                             currentVerts = edge.verts
                             for vert in currentVerts:
                                 if vert.index not in listProslychVerts:
-                                    xSour = (vert.co[1]+pripocetY)*positiveNegative
+                                    xSour = (vert.co[0]+additionX)*positiveNegative
+                                    ySour = (vert.co[1]+additionY)*positiveNegative
+                                    if format == 2:
+                                        xSour = (vert.co[1]+additionY)*positiveNegative
+                                        ySour = (vert.co[0]+additionX)*positiveNegative
+                                    zSour = vert.co[2]+additionZ
                                     file.write(str("{:.3f}".format(xSour)) + " ")
-                                    ySour = (vert.co[0]+pripocetX)*positiveNegative
                                     file.write(str("{:.3f}".format(ySour)) + " ")
-                                    zSour = vert.co[2]+pripocetZ
                                     file.write(str("{:.3f}".format(zSour)) + " ")
                                     listProslychVerts.append(vert.index)
                                     vert2=vert
@@ -192,11 +207,14 @@ def zapisXml():
                 bm.from_mesh(meshObjektu)   # fill it in from a Mesh
                 for vert in bm.verts:
                     file.write("    <CgPoint name=\"" + str(vert.index) + "\" code=\"\">")
-                    xSour = (vert.co[1]+pripocetY)*positiveNegative
+                    xSour = (vert.co[0]+additionX)*positiveNegative
+                    ySour = (vert.co[1]+additionY)*positiveNegative
+                    if format == 2:
+                        xSour = (vert.co[1]+additionY)*positiveNegative
+                        ySour = (vert.co[0]+additionX)*positiveNegative
+                    zSour = vert.co[2]+additionZ
                     file.write(str("{:.3f}".format(xSour)) + " ")
-                    ySour = (vert.co[0]+pripocetX)*positiveNegative
                     file.write(str("{:.3f}".format(ySour)) + " ")
-                    zSour = vert.co[2]+pripocetZ
                     file.write(str("{:.3f}".format(zSour)) + " ")
                     file.write("</CgPoint>\n")
 
