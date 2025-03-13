@@ -9,6 +9,8 @@ import bmesh
 
 #control checks and UI will maybe added in future, unexpected results and behavior will most probably occur if you dont follow the rules
 
+#testik
+
 projectName = "model zlaby proviz 3"
 fileName = "UniControl/vytycovaci modely/zlaby proviz model3.xml"
 
