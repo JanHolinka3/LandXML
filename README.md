@@ -1,6 +1,6 @@
 script for Blender to run from text editor and create landxml file from active collection objects
 
-directly in code is mandatory to specify: projectName, fileName, pripocetX, pripocetY, pripocetZ, positiveNegative
+directly in code is mandatory to specify: projectName, fileName, pripocetX, pripocetY, pripocetZ, positiveNegative, format
 
 pripocetX, pripocetY, pripocetZ are for world coords (you have to solve that for your self for your local coord system). Im using this script to create models for UniControl Machine Control
 
