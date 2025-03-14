@@ -2,7 +2,7 @@ script for Blender to run from text editor and create landxml file from active c
 
 directly in code is mandatory to specify: projectName, fileName, additionX, additionY, additionZ, positiveNegative, format
 
-pripocetX, pripocetY, pripocetZ are for world coords (you have to solve that for your self for your local coord system). Im using this script to create models for UniControl Machine Control
+additionX, additionY, additionZ are for world coords (you have to solve that for your self for your local coord system). Im using this script to create models for UniControl Machine Control
 
 positiveNegative should be 1 for positive coords and -1 for negative coords
 
